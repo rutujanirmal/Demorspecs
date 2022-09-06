@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  get "getRequest", to: "employees#index" 
+  get "employees", to: "employees#index" 
 
-  put "putReuqest", to: "employees#update"
+  put "booking", to: "employees#update"
 
 end
