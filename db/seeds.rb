@@ -1,7 +1,16 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
+require 'csv'
+
+CSV.foreach(Rails.root.join('lib/seeds/test.csv'), headers: true) do |row|
+  t = Employee.new
+  t.full_name = row['Name']
+  t.emp_id = row['Emp_Id']
+  t.gender = row['Gender']
+  t.save!
+
+  puts "#{t.full_name} - #{t.emp_id} Saved!"
+end
+
+puts "There are #{Employee.count} in the employees table"
