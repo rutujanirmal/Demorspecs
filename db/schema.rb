@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
+git # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -24,8 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_112800) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "room_number"
-    t.string "full_name"
+    t.string "room_number", null: false
+    t.string "full_name", null: false
     t.string "room_mate1"
     t.string "room_mate2"
     t.string "room_mate3"
