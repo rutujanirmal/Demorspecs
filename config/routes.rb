@@ -3,4 +3,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  get "getRequest", to: "employees#index" 
+
+  put "putReuqest", to: "employees#update"
+
 end
