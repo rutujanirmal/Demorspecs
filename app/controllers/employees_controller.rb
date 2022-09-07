@@ -12,13 +12,18 @@ class EmployeesController < ApplicationController
       x += 1
     end
     if x != 3
-      render json: {"result": "Fail"}
+      render json: {"result": "Fail due to number of arguments"}
     else
       @ids.each_value do |id|
         obj = Employee.find_by(emp_id: id)
         obj.allocated = true
         obj.save!
       end
+      obj = Room.new
+      obj.room_mate1, obj.room_mate2, obj.room_mate3 = @ids[:id1], @ids[:id2], @ids[:id3]
+      obj.full_name = Employee.find_by(emp_id: @ids[:id1]).full_name
+      obj.room_number = "A" + obj.room_mate1
+      obj.save!
       render json: {"result": "Successfull"}
     end
   end
