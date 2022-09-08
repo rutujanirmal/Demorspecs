@@ -21,11 +21,11 @@ class EmployeesController < ApplicationController
         obj.save!
       end
       obj = Room.new
-      obj.room_mate1, obj.room_mate2, obj.room_mate3 = @ids[:id1], @ids[:id2], @ids[:id3]
-      obj.full_name = Employee.find_by(emp_id: @ids[:id1]).full_name
+      obj.room_mate1, obj.room_mate2, obj.room_mate3 = ids[:id1], ids[:id2], ids[:id3]
+      obj.full_name = Employee.find_by(emp_id: ids[:id1]).full_name
       obj.room_number = "A" + obj.room_mate1
       obj.save!
-      render status: 200 , json: {result: "Successfull"}
+      render status: 200 , json: {result: "Successful "}
     end
   end
 
