@@ -31,20 +31,17 @@ class EmployeesController < ApplicationController
 
   def fetch_details
     # fetch the employee details from the email id provided
-    email_id = params[:email]
-    validate_email = /^[a-z]+\.[a-z]+\@joshsoftware\.com|digital$/i
-    if(email_id.match(validate_email))
-      user = Employee.select("full_name", "emp_id", "gender").where(email: email_id )
-      if(!user.empty?())
-        # It will send array of matched user details
-        render status: 200 , json: user
+    email_id = params[:email].present? ? params[:email] : ""
+    if(email_id.match(EMAIL_REGEX))
+      user = Employee.select("full_name", "emp_id", "gender").where(email: email_id ).first
+      if(user.present?)
+        render status: 200 , json: user.as_json
       else
         render status: 400 , json: {error: "Email Not Found"}
       end
     else
       render status: 400 , json: {error: "Use Joshsoftware email"}
     end
-    
   end
 
   private
