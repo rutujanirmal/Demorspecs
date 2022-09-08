@@ -30,10 +30,18 @@ class EmployeesController < ApplicationController
 
   def fetch_details
     # fetch the employee details from the email id provided
-    @User = Employee.select("full_name", "emp_id", "gender").where(email: params[:email] )
-
-    # @User = Employee.find(params[:id])
-    render json: @User
+    emailid = params[:email]
+    if(emailid.match(/^[a-z]+\.[a-z]+\@joshsoftware\.com|digital$/i))
+      @User = Employee.select("full_name", "emp_id", "gender").where(email: emailid )
+      if(!@User.empty?())
+        render json: @User
+      else
+        render json: {"Email": "Not Found"}
+      end
+    else
+      render json: {"Invalid Email": "Use Joshsoftware email"}
+    end
+    
   end
 
   private
