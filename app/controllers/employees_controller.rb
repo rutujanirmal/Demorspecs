@@ -33,9 +33,13 @@ class EmployeesController < ApplicationController
     # fetch the employee details from the email id provided
     email_id = params[:email].present? ? params[:email] : ""
     if(email_id.match(EMAIL_REGEX))
-      user = Employee.select("full_name", "emp_id", "gender").where(email: email_id ).first
+      user = Employee.select("full_name", "emp_id", "gender","allocated").where(email: email_id ).first
       if(user.present?)
-        render status: 200 , json: user.as_json
+        if(user.allocated)
+          render status: 400 , json: {error: "Room already allocated"}
+        else
+          render status: 200 , json: user.as_json
+        end
       else
         render status: 400 , json: {error: "Email Not Found"}
       end
