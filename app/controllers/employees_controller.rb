@@ -25,7 +25,7 @@ class EmployeesController < ApplicationController
       obj.full_name = Employee.find_by(emp_id: ids[:id1]).full_name
       obj.room_number = "A" + obj.room_mate1
       obj.save!
-      render status: 200 , json: {result: "Successful "}
+      render status: 200 , json: {result: "Successful"}
     end
   end
 
